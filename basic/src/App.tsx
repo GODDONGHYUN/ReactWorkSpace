@@ -1,5 +1,7 @@
 import React from "react";
 import "./App.css";
+import Component from "./component/Component";
+import Sample from "./component/Sample";
 
 // JSX / TSX :
 // ? JSX (JavaScript XML) / TSX (TypeScript XML)
@@ -36,19 +38,46 @@ class ClassComponent extends React.Component {
   }
 }
 
-// ! 클래스형 컴포넌트는 잘 사용되지 않음
+// ? 클래스형 컴포넌트는 잘 사용되지 않음
 // * ES7 + React/Redux/React-Native snippets 확장을 설치 후
 // * 단축 명령으로 클래스형 혹은 함수형 컴포넌트를 생성할 수 있음
 
-// * 클래스형 : rcc 단축 명령으로 생성 가능
+//  ! 클래스형 : rcc 단축 명령으로 생성 가능
 // * 클래스의 이름 = 파일명과 동일하게 작성
+// ? rcc
+// import React, { Component } from 'react'
+
+// export default class App extends Component {
+//   render() {
+//     return (
+//       <div>
+
+//       </div>
+//     )
+//   }
+// }
+
+// !  함수형 : rfc 단축 명령으로 생성 가능
+// * 함수명 = 파일명과 동일하게 작성됨
+// ? rfc
+// import React from 'react'
+
+// export default function App() {
+//   return (
+//     <div>
+
+//     </div>
+//   )
+// }
 
 function App() {
   return (
-    <div>
-      <ClassComponent />
-      <FunctionComponent />
-    </div>
+    <>
+      {/* <ClassComponent /> */}
+      {/* <FunctionComponent />  */}
+      <Component />
+      <Sample />
+    </>
   );
 }
 
