@@ -14,6 +14,26 @@ export default function Component() {
     <div>
       <h1>Component</h1>
       <h1>Component</h1>
+      <JsxComponent />
     </div>
+  );
+}
+
+function JsxComponent() {
+  // JSX (TSX)의 규칙
+  // * 1. 반드시 하나의 요소를 반환 (div 요소 혹은 빈<> 요소)
+  // * 2. 모든 태그 닫기
+  // * 3. 속성들을 JSX로 지정되어있는 이름으로 사용해야함 (lowerCamelCase)
+  return (
+    <>
+      <h1>첫 번째 페이지 입니다.</h1>
+      <div>
+        <img
+          src="https://i.namu.wiki/i/yHMdZs8LhKDP0D0XmvNkWe4NplRU5BDyXiZNDk5BTOd9ON5KtykFiDO_Q7SDpQLA-q9Q4fyFKfzM3apcZnPGtg.webp"
+          className="image-box"
+          alt="pig"
+        />
+      </div>
+    </>
   );
 }
