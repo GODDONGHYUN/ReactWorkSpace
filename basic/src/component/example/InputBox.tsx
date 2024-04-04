@@ -2,38 +2,13 @@
 // 각각의 컴포넌트는 모두 export 가능하도록 내보냄
 import React from "react";
 
-export default function InputBox() {
-  return (
-    <>
-      <IdInputBox />
-      <PasswordInputBox />
-    </>
-  );
+interface Props {
+  label: string;
+  type: "text" | "password";
+  placeholder: string;
 }
 
-function IdInputBox() {
-  const label = "아이디";
-  const type = "text";
-  const placeholder = "아이디를 입력해주세요.";
-  return (
-    <>
-      <div className="sign-in-input-container">
-        <div className="input-box">
-          <div className="input-label label">{label}</div>
-          <div className="input-content-box">
-            <input className="input" type={type} placeholder={placeholder} />
-          </div>
-          <div className="input-message"></div>
-        </div>
-      </div>
-    </>
-  );
-}
-
-function PasswordInputBox() {
-  const label = "비밀번호";
-  const type = "password";
-  const placeholder = "비밀번호를 입력해주세요.";
+export default function InputBox({ label, type, placeholder }: Props) {
   return (
     <>
       <div className="input-box">
@@ -51,3 +26,55 @@ function PasswordInputBox() {
     </>
   );
 }
+
+// ! ================================================================================================
+
+// export default function InputBox() {
+//   return (
+//     <>
+//       <IdInputBox />
+//       <PasswordInputBox />
+//     </>
+//   );
+// }
+
+// export function IdInputBox() {
+//   const label = "아이디";
+//   const type = "text";
+//   const placeholder = "아이디를 입력해주세요.";
+//   return (
+//     <>
+//       <div className="sign-in-input-container">
+//         <div className="input-box">
+//           <div className="input-label label">{label}</div>
+//           <div className="input-content-box">
+//             <input className="input" type={type} placeholder={placeholder} />
+//           </div>
+//           <div className="input-message"></div>
+//         </div>
+//       </div>
+//     </>
+//   );
+// }
+
+// export function PasswordInputBox() {
+//   const label = "비밀번호";
+//   const type = "password";
+//   const placeholder = "비밀번호를 입력해주세요.";
+//   return (
+//     <>
+//       <div className="input-box">
+//         <div className="input-label label">{label}</div>
+//         <div className="input-content-box">
+//           <input
+//             id="password"
+//             className="input"
+//             type={type}
+//             placeholder={placeholder}
+//           />
+//         </div>
+//         <div id="sign-in-message" className="input-message error"></div>
+//       </div>
+//     </>
+//   );
+// }

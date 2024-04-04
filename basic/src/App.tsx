@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import Properties from "./component/component_manage/Properties";
 import Component from "./component/Component";
 import Sample from "./component/Sample";
 import SignInContainer from "./component/example/SignInContainer";
@@ -79,8 +80,9 @@ function App() {
       {/* <FunctionComponent />  */}
       {/* <Component />
       <Sample /> */}
-      {/* <SignInContainer /> */}
-      <CurlyBraces />
+      <SignInContainer />
+      {/* <CurlyBraces /> */}
+      {/* <Properties /> */}
     </>
   );
 }
