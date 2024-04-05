@@ -12,7 +12,7 @@ export default function InputBox({ label, type, placeholder, button }: Props) {
       <div className="input-label label">{label}</div>
       <div className="input-content-box">
         <input className="input" type={type} placeholder={placeholder} />
-        <div className="input-disable-button">{button}</div>
+        {button && <div className="input-disable-button">{button}</div>}
       </div>
       <div className="input-message"></div>
     </div>
