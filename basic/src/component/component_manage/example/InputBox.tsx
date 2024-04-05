@@ -4,7 +4,7 @@ interface Props {
   label: string;
   type: string;
   placeholder: string;
-  button: string;
+  button?: string;
 }
 export default function InputBox({ label, type, placeholder, button }: Props) {
   return (
