@@ -8,6 +8,7 @@ import CurlyBraces from "./component/CurlyBraces";
 import SignUpContainer from "./component/component_manage/example/SignUpContainer";
 import ConditionalRendering from "./component/component_manage/ConditionalRendering";
 import ListRendering from "./component/component_manage/ListRendering";
+import EventComponent from "./interaction/EventComponent";
 
 // JSX / TSX :
 // ? JSX (JavaScript XML) / TSX (TypeScript XML)
@@ -83,11 +84,12 @@ function App() {
       {/* <FunctionComponent />  */}
       {/* <Component />
       <Sample /> */}
-      <SignUpContainer />
+      {/* <SignUpContainer /> */}
       {/* <CurlyBraces /> */}
       {/* <Properties /> */}
       {/* <ConditionalRendering /> */}
       {/* <ListRendering /> */}
+      <EventComponent />
     </>
   );
 }
