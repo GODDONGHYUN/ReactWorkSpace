@@ -9,6 +9,7 @@ export interface InputBoxProps {
   onChangeHandler: (event: ChangeEvent<HTMLInputElement>) => void;
   button?: string;
   buttonStatus?: boolean;
+  onButtonClickHandler?: () => void;
 }
 export default function InputBox({
   label,
@@ -18,6 +19,7 @@ export default function InputBox({
   button,
   buttonStatus,
   onChangeHandler,
+  onButtonClickHandler,
 }: InputBoxProps) {
   const buttonClass = buttonStatus
     ? "input-primary-button"
@@ -34,7 +36,11 @@ export default function InputBox({
           onChange={onChangeHandler}
           value={value}
         />
-        {button && <div className={buttonClass}>{button}</div>}
+        {button && (
+          <div className={buttonClass} onClick={onButtonClickHandler}>
+            {button}
+          </div>
+        )}
       </div>
       <div className="input-message"></div>
     </div>

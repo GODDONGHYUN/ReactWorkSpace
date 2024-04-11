@@ -18,6 +18,7 @@
 
 .input::placeholder {
   color: rgba(138, 146, 166, 1);
+  font-size: 14px;
 }
 
 .sns-container-title {
