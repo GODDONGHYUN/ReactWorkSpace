@@ -7,6 +7,7 @@ import InputBox from "components/Inputbox";
 
 type AuthPage = "sign-in" | "sign-up";
 
+//                                    interface                                  //
 interface SnsContainerProps {
   title: string;
 }
@@ -16,7 +17,7 @@ function SnsContainer({ title }: SnsContainerProps) {
   const onSnsButtonClickHandler = (type: "kakao" | "naver") => {
     alert(type);
   };
-
+  //                                    render                                   //
   return (
     <div className="authentication-sns-container">
       <div className="sns-container-title label">{title}</div>
@@ -34,6 +35,7 @@ function SnsContainer({ title }: SnsContainerProps) {
   );
 }
 
+//                                    interface                                  //
 interface Props {
   onLinkClickHandler: () => void;
 }
@@ -232,14 +234,17 @@ function SignUp({ onLinkClickHandler }: Props) {
 
 // ====================================================================================================
 
+// 																				component																				//
 export default function Authentication() {
+  //                                    state                                   //
   const [page, setPage] = useState<AuthPage>("sign-in");
 
+  //                                   event handler                                   //
   const onLinkClickHandler = () => {
     if (page === "sign-in") setPage("sign-up");
     else setPage("sign-in");
   };
-
+  //                                   variable                                //
   const AuthenticationContents =
     page === "sign-in" ? (
       <SignIn onLinkClickHandler={onLinkClickHandler} />
@@ -253,6 +258,7 @@ export default function Authentication() {
     })`,
   };
 
+  //                                    render                                   //
   return (
     <div id="authentication-wrapper">
       <div className="authentication-image-box" style={imageBosStyle}></div>
