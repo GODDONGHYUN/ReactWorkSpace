@@ -1,5 +1,9 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import "./style.css";
+
+import SignInBackground from "assets/image/sign-in-background.png";
+import SignUpBackground from "assets/image/sign-up-background.png";
+import InputBox from "components/Inputbox";
 
 type AuthPage = "sign-in" | "sign-up";
 
@@ -8,11 +12,41 @@ interface Props {
 }
 
 function SignIn({ onLinkClickHandler }: Props) {
-  const onSignInButtonClickHandler = () => {};
+  const [id, setId] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  const onIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setId(event.target.value);
+  };
+
+  const onPasswordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value);
+  };
+
+  const onSignInButtonClickHandler = () => {
+    alert(`아이디 : ${id} / 비밀번호 : ${password}`);
+    setId("");
+    setPassword("");
+  };
 
   return (
     <div className="authentication-contents">
-      <div className="authentication-input-container"></div>
+      <div className="authentication-input-container">
+        <InputBox
+          label={"아이디"}
+          type={"text"}
+          value={id}
+          placeholder={"아이디를 입력하세요."}
+          onChangeHandler={onIdChangeHandler}
+        />
+        <InputBox
+          label={"비밀번호"}
+          type={"password"}
+          value={password}
+          placeholder={"비밀번호를 입력하세요."}
+          onChangeHandler={onPasswordChangeHandler}
+        />
+      </div>
       <div className="authentication-button-container">
         <div
           className="primary-button full-width"
@@ -70,9 +104,15 @@ export default function Authentication() {
       <SignUp onLinkClickHandler={onLinkClickHandler} />
     );
 
+  const imageBosStyle = {
+    backgroundImage: `url(${
+      page === "sign-in" ? SignInBackground : SignUpBackground
+    })`,
+  };
+
   return (
     <div id="authentication-wrapper">
-      <div className="authentication-image-box"></div>
+      <div className="authentication-image-box" style={imageBosStyle}></div>
       <div className="authentication-box">
         <div className="authentication-container">
           <div className="authentication-title h1">
