@@ -47,20 +47,32 @@ function SignIn({ onLinkClickHandler }: Props) {
   const [id, setId] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
+  const [message, setMessage] = useState<string>("");
+
   //                                   event handler                                   //
 
   const onIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setId(event.target.value);
+    setMessage("");
   };
 
   const onPasswordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
+    setMessage("");
   };
 
   const onSignInButtonClickHandler = () => {
-    alert(`아이디 : ${id} / 비밀번호 : ${password}`);
-    setId("");
-    setPassword("");
+    const ID = "service123";
+    const PASSWORD = "qwer1234";
+
+    const isSuccess = id === ID && password && PASSWORD;
+    if (isSuccess) {
+      setId("");
+      setPassword("");
+      alert("로그인 성공 !");
+    } else {
+      setMessage("로그인 정보가 일치하지 않습니다.");
+    }
   };
 
   //                                    render                                   //
@@ -81,6 +93,8 @@ function SignIn({ onLinkClickHandler }: Props) {
           value={password}
           placeholder={"비밀번호를 입력하세요."}
           onChangeHandler={onPasswordChangeHandler}
+          message={message}
+          error
         />
       </div>
       <div className="authentication-button-container">
@@ -118,6 +132,8 @@ function SignUp({ onLinkClickHandler }: Props) {
     useState<boolean>(false);
 
   const [isIdCheck, setIdCheck] = useState<boolean>(false);
+  const [isPasswordPattern, setIsPasswordPatten] = useState<boolean>(false);
+  const [isEqualPassword, setIsEqualPassword] = useState<boolean>(false);
   const [isEmailCheck, setEmailCheck] = useState<boolean>(false);
   const [isAuthNumberCheck, setAuthNumberCheck] = useState<boolean>(false);
 
@@ -132,11 +148,12 @@ function SignUp({ onLinkClickHandler }: Props) {
   const [isAuthNumberError, setAuthNumberError] = useState<boolean>(false);
 
   const isSignUpActive =
+    isIdCheck &&
     isEmailCheck &&
     isEmailCheck &&
     isAuthNumberCheck &&
-    password &&
-    passwordCheck;
+    isPasswordPattern &&
+    isEqualPassword;
 
   // primary-button full-width / disable-button full-width
   const signUpButtonClass = `${
@@ -158,6 +175,7 @@ function SignUp({ onLinkClickHandler }: Props) {
 
     const passwordPattern = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,13}$/;
     const isPasswordPattern = passwordPattern.test(value);
+    setIsPasswordPatten(isPasswordPattern);
     const passwordMessage = isPasswordPattern
       ? ""
       : value
@@ -171,6 +189,7 @@ function SignUp({ onLinkClickHandler }: Props) {
       : passwordCheck
       ? "비밀번호가 일치하지 않습니다."
       : "";
+    setIsEqualPassword(isEqualPassword);
     setPasswordCheckMessage(passwordCheckMessage);
   };
 
@@ -180,6 +199,7 @@ function SignUp({ onLinkClickHandler }: Props) {
     const { value } = event.target;
     setPasswordCheck(value);
     const isEqualPassword = password === value;
+    setIsEqualPassword(isEqualPassword);
     const passwordCheckMessage = isEqualPassword
       ? ""
       : value
@@ -213,8 +233,8 @@ function SignUp({ onLinkClickHandler }: Props) {
     setIdError(!idCheck);
 
     const idMessage = idCheck
-      ? "사용 가능한 아이디 입니다"
-      : "이미 사용 중인 아이디 입니다.";
+      ? "사용 가능한 아이디입니다."
+      : "이미 사용중인 아이디입니다.";
     setIdMessage(idMessage);
   };
 
