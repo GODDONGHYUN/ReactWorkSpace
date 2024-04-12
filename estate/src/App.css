@@ -98,3 +98,11 @@
 .full-width {
   width: 100%;
 }
+
+.primary {
+  color: rgba(58, 87, 232, 1);
+}
+
+.error {
+  color: rgba(255, 84, 62, 1);
+}
