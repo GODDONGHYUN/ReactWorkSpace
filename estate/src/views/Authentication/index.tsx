@@ -1,24 +1,26 @@
 import React, { ChangeEvent, useState } from "react";
 import "./style.css";
-import "../../App.css";
 
 import SignInBackground from "assets/image/sign-in-background.png";
 import SignUpBackground from "assets/image/sign-up-background.png";
 import InputBox from "components/Inputbox";
 
+//                    type                    //
 type AuthPage = "sign-in" | "sign-up";
 
-//                                    interface                                  //
+//                    interface                    //
 interface SnsContainerProps {
   title: string;
 }
 
-//                                    function                                   //
+//                    component                    //
 function SnsContainer({ title }: SnsContainerProps) {
+  //                    event handler                    //
   const onSnsButtonClickHandler = (type: "kakao" | "naver") => {
     alert(type);
   };
-  //                                    render                                   //
+
+  //                    render                    //
   return (
     <div className="authentication-sns-container">
       <div className="sns-container-title label">{title}</div>
@@ -36,21 +38,20 @@ function SnsContainer({ title }: SnsContainerProps) {
   );
 }
 
-//                                    interface                                  //
+//                    interface                    //
 interface Props {
   onLinkClickHandler: () => void;
 }
 
-// 																				component																				//
+//                    component                    //
 function SignIn({ onLinkClickHandler }: Props) {
-  //                                    state                                   //
+  //                    state                    //
   const [id, setId] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
   const [message, setMessage] = useState<string>("");
 
-  //                                   event handler                                   //
-
+  //                    event handler                    //
   const onIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setId(event.target.value);
     setMessage("");
@@ -65,33 +66,33 @@ function SignIn({ onLinkClickHandler }: Props) {
     const ID = "service123";
     const PASSWORD = "qwer1234";
 
-    const isSuccess = id === ID && password && PASSWORD;
+    const isSuccess = id === ID && password === PASSWORD;
+
     if (isSuccess) {
       setId("");
       setPassword("");
-      alert("로그인 성공 !");
+      alert("로그인 성공!");
     } else {
       setMessage("로그인 정보가 일치하지 않습니다.");
     }
   };
 
-  //                                    render                                   //
-
+  //                    render                    //
   return (
     <div className="authentication-contents">
       <div className="authentication-input-container">
         <InputBox
-          label={"아이디"}
-          type={"text"}
+          label="아이디"
+          type="text"
           value={id}
-          placeholder={"아이디를 입력하세요."}
+          placeholder="아이디를 입력해주세요"
           onChangeHandler={onIdChangeHandler}
         />
         <InputBox
-          label={"비밀번호"}
-          type={"password"}
+          label="비밀번호"
+          type="password"
           value={password}
-          placeholder={"비밀번호를 입력하세요."}
+          placeholder="비밀번호를 입력해주세요"
           onChangeHandler={onPasswordChangeHandler}
           message={message}
           error
@@ -110,16 +111,13 @@ function SignIn({ onLinkClickHandler }: Props) {
       </div>
       <div className="short-divider"></div>
       <SnsContainer title="SNS 로그인" />
-      <div className="authentication-sns-container"></div>
     </div>
   );
 }
 
-// ====================================================================================================
-
-// 																				component																				//
+//                    component                    //
 function SignUp({ onLinkClickHandler }: Props) {
-  //                                    state                                   //
+  //                    state                    //
   const [id, setId] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [passwordCheck, setPasswordCheck] = useState<string>("");
@@ -132,8 +130,8 @@ function SignUp({ onLinkClickHandler }: Props) {
     useState<boolean>(false);
 
   const [isIdCheck, setIdCheck] = useState<boolean>(false);
-  const [isPasswordPattern, setIsPasswordPatten] = useState<boolean>(false);
-  const [isEqualPassword, setIsEqualPassword] = useState<boolean>(false);
+  const [isPasswordPattern, setPasswordPattern] = useState<boolean>(false);
+  const [isEqualPassword, setEqualPassword] = useState<boolean>(false);
   const [isEmailCheck, setEmailCheck] = useState<boolean>(false);
   const [isAuthNumberCheck, setAuthNumberCheck] = useState<boolean>(false);
 
@@ -150,20 +148,17 @@ function SignUp({ onLinkClickHandler }: Props) {
   const isSignUpActive =
     isIdCheck &&
     isEmailCheck &&
-    isEmailCheck &&
     isAuthNumberCheck &&
     isPasswordPattern &&
     isEqualPassword;
-
-  // primary-button full-width / disable-button full-width
   const signUpButtonClass = `${
     isSignUpActive ? "primary" : "disable"
   }-button full-width`;
 
-  //                                   event handler                                   //
+  //                    event handler                    //
   const onIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    setId(event.target.value);
+    setId(value);
     setIdButtonStatus(value !== "");
     setIdCheck(false);
     setIdMessage("");
@@ -175,7 +170,8 @@ function SignUp({ onLinkClickHandler }: Props) {
 
     const passwordPattern = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,13}$/;
     const isPasswordPattern = passwordPattern.test(value);
-    setIsPasswordPatten(isPasswordPattern);
+    setPasswordPattern(isPasswordPattern);
+
     const passwordMessage = isPasswordPattern
       ? ""
       : value
@@ -184,12 +180,13 @@ function SignUp({ onLinkClickHandler }: Props) {
     setPasswordMessage(passwordMessage);
 
     const isEqualPassword = passwordCheck === value;
+    setEqualPassword(isEqualPassword);
+
     const passwordCheckMessage = isEqualPassword
       ? ""
       : passwordCheck
       ? "비밀번호가 일치하지 않습니다."
       : "";
-    setIsEqualPassword(isEqualPassword);
     setPasswordCheckMessage(passwordCheckMessage);
   };
 
@@ -198,8 +195,10 @@ function SignUp({ onLinkClickHandler }: Props) {
   ) => {
     const { value } = event.target;
     setPasswordCheck(value);
+
     const isEqualPassword = password === value;
-    setIsEqualPassword(isEqualPassword);
+    setEqualPassword(isEqualPassword);
+
     const passwordCheckMessage = isEqualPassword
       ? ""
       : value
@@ -210,7 +209,7 @@ function SignUp({ onLinkClickHandler }: Props) {
 
   const onEmailChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    setEmail(event.target.value);
+    setEmail(value);
     setEmailButtonStatus(value !== "");
     setEmailCheck(false);
     setAuthNumberCheck(false);
@@ -219,7 +218,7 @@ function SignUp({ onLinkClickHandler }: Props) {
 
   const onAuthNumberChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    setAuthNumber(event.target.value);
+    setAuthNumber(value);
     setAuthNumberButtonStatus(value !== "");
     setAuthNumberCheck(false);
     setAuthNumberMessage("");
@@ -260,8 +259,8 @@ function SignUp({ onLinkClickHandler }: Props) {
     setAuthNumberError(!authNumberCheck);
 
     const authNumberMessage = authNumberCheck
-      ? "인증번호가 확인 되었습니다."
-      : "인증번호가 일치하지 않습니다";
+      ? "인증번호가 확인되었습니다."
+      : "인증번호가 일치하지 않습니다.";
     setAuthNumberMessage(authNumberMessage);
   };
 
@@ -270,7 +269,7 @@ function SignUp({ onLinkClickHandler }: Props) {
     alert("회원가입");
   };
 
-  //                                    render                                   //
+  //                    render                    //
   return (
     <div className="authentication-contents">
       <SnsContainer title="SNS 회원가입" />
@@ -349,19 +348,18 @@ function SignUp({ onLinkClickHandler }: Props) {
   );
 }
 
-// ====================================================================================================
-
-// 																				component																				//
+//                    component                    //
 export default function Authentication() {
-  //                                    state                                   //
+  //                    state                    //
   const [page, setPage] = useState<AuthPage>("sign-in");
 
-  //                                   event handler                                   //
+  //                    event handler                    //
   const onLinkClickHandler = () => {
     if (page === "sign-in") setPage("sign-up");
     else setPage("sign-in");
   };
-  //                                   variable                                //
+
+  //                    constant                    //
   const AuthenticationContents =
     page === "sign-in" ? (
       <SignIn onLinkClickHandler={onLinkClickHandler} />
@@ -369,20 +367,20 @@ export default function Authentication() {
       <SignUp onLinkClickHandler={onLinkClickHandler} />
     );
 
-  const imageBosStyle = {
+  const imageBoxStyle = {
     backgroundImage: `url(${
       page === "sign-in" ? SignInBackground : SignUpBackground
     })`,
   };
 
-  //                                    render                                   //
+  //                    render                    //
   return (
     <div id="authentication-wrapper">
-      <div className="authentication-image-box" style={imageBosStyle}></div>
+      <div className="authentication-image-box" style={imageBoxStyle}></div>
       <div className="authentication-box">
         <div className="authentication-container">
           <div className="authentication-title h1">
-            {"임대 주택 가격 서비스"}
+            {"임대 주택 가격서비스"}
           </div>
           {AuthenticationContents}
         </div>
