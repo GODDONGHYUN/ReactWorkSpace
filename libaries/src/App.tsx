@@ -7,6 +7,7 @@ import ReactRouterLibrary, {
   ReactRouterPage2,
 } from "./react-router/ReactRouterLibrary";
 import Layout from "./react-router/Layout";
+import AxiosLibrary from "./axios/AxiosLibrary";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="page2" element={<ReactRouterPage2 />} />
       </Route>
       <Route path="/zustand" element={<ZustandLibrary />} />
+      <Route path="/axios" element={<AxiosLibrary />} />
       <Route path="*" element={<h3>404 Error</h3>} />
     </Routes>
   );
